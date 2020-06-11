@@ -6,7 +6,7 @@ I've used Php, Phpmyadmin, and Postman to read the requests and post them in Jso
 
 The 'php_project_catalog' folder it is the first alternative which have the Task1.
 
-The next folder, 'php_project_catalog_update' contain The both first and second Tasks
+The next folder, 'php_project_catalog_update' contain both, first and second Tasks
 For protection i've used JWT.
 
 I have attached the datebase also, 'catalog_product'
