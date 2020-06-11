@@ -22,27 +22,26 @@ if(isset($_POST['submit'])){
 		$sql="select * from user where username='$username' and  password='$password'";
 		$res=mysqli_query($con,$sql);
       
-      if(mysqli_num_rows($res)){
+     	if(mysqli_num_rows($res)){
          
          $_SESSION['IS_LOGIN']='yes';
 			mysqli_query($con,"delete from login_log where ip_address='$ip_address'");
          
-?>
 
-<?php
+
+	}else{
+		$total_count++;
+		$rem_attm=3-$total_count;
+		if($rem_attm==0){
+			$msg="To many failed login attempts. Please login after 30 sec";
 		}else{
-			$total_count++;
-			$rem_attm=3-$total_count;
-			if($rem_attm==0){
-				$msg="To many failed login attempts. Please login after 30 sec";
-			}else{
-				$msg="Please enter valid login details.<br/>$rem_attm attempts remaining";
-			}
-			$try_time=time();
-			mysqli_query($con,"insert into login_log(ip_address,try_time) values('$ip_address','$try_time')");
-			
+			$msg="Please enter valid login details.<br/>$rem_attm attempts remaining";
 		}
+		$try_time=time();
+		mysqli_query($con,"insert into login_log(ip_address,try_time) values('$ip_address','$try_time')");
+			
 	}
+   }
 }
 
 function getIpAddr(){
