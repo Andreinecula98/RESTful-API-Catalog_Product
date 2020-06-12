@@ -1,8 +1,4 @@
 <?php
-    $count = 0;
-    $delay = time();
-?>
-<?php
 
     ini_set("display_errors", 1);
 
@@ -39,8 +35,18 @@
                 $user->username = $data->username;
 
                 $user_data = $user->check_login();
-            
-                if(!empty($user_data)){
+                
+                $total_count = $user->check_login_attepmts();
+
+                if($total_count == 3){
+                    
+                    http_response_code(404);
+                        echo json_encode(array(
+                        "status" => 0,
+                        "message" => "To many failed login attempts. Please login after 30 sec"
+                        ));
+
+                }else if(!empty($user_data)){
 
                     $usernaname = $user_data['username'];
                     $password = $user_data['password'];
@@ -78,12 +84,22 @@
                         "message" => "User logged in successfully"
                         ));
                     }else{
-                        http_response_code(404);
-                        echo json_encode(array(
-                        "status" => 0,
-                        "message" => "Invalid credentials"
-                        ));
-
+                        $total_count++;
+                        $rem_attm=3-$total_count;
+                        if($rem_attm==0){
+                            http_response_code(404);
+                            echo json_encode(array(
+                                "status" => 0,
+                                "message" => "To many failed login attempts. Please login after 30 sec"
+                            ));
+                        }else{
+                            http_response_code(404);
+                            echo json_encode(array(
+                                "status" => 0,
+                                "message" => "Please enter valid login details.<br/>$rem_attm attempts remaining"
+                            ));
+                        }
+                        $rem_attm = 0;
                     }
 
                 }else{
