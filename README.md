@@ -18,5 +18,3 @@ I can update data from a product or a category.
 For users I made a request how can create a user then view the informations about it and for login I've use a jwt method to protect the informations. 
 
 At the part of rate limit, I made a counter of 3 requests and a time of 30 seconds in case of error.
-
-Because it is the first time I worked with api I don't know how to do the rate limit part, but I attached also a version with html and php form.
