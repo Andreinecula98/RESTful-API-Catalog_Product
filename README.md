@@ -19,4 +19,4 @@ For users I made a request how can create a user then view the informations abou
 
 At the part of rate limit, I made a counter of 3 requests and a time of 30 seconds in case of error.
 
-Because it is the first time I worked with api I don't know how to do the rate limit part, but I attached also a version with a version with html and php form.
+Because it is the first time I worked with api I don't know how to do the rate limit part, but I attached also a version with html and php form.
